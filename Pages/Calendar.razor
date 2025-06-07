@@ -1,0 +1,86 @@
+﻿@page "/agendar"
+@layout MainLayoutEmpty
+@inherits CalendarBase
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="d-flex justify-center align-center" Style="min-height: 100vh;">
+    <MudPaper Class="d-flex flex-column align-center pa-8" Width="100%" Elevation="2">
+
+        @if (ControlaTela == 1)
+        {
+            <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-4">Selecione uma Data</MudText>
+
+            <MudDatePicker Label="Data agendar" Variant="Variant.Outlined" Class="mb-4" PickerVariant="PickerVariant.Static" DateChanged="OnChangeData" />
+
+            @if (Data != null)
+            {
+                <MudGrid Class="align-center pa-3 mb-4">
+                    <MudItem md="4" sm="2">
+                        @if (HoraSelecionada == "09:30")
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick=@(()=>{EscolheHorario("09:30");})>09:30</MudButton>                        
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick=@(()=>{EscolheHorario("09:30");})>09:30</MudButton>
+                        }
+                    </MudItem>
+                    <MudItem md="4" sm="2">
+                        @if (HoraSelecionada == "12:30")
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick=@(()=>{EscolheHorario("12:30");}) Disabled="true">12:30</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick=@(()=>{EscolheHorario("12:30");}) Disabled="true">12:30</MudButton>
+                        }
+                    </MudItem>
+                    <MudItem md="4" sm="2">
+                        @if (HoraSelecionada == "15:30")
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick=@(()=>{EscolheHorario("15:30");})>15:30</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick=@(()=>{EscolheHorario("15:30");})>15:30</MudButton>
+                        }
+                    </MudItem>
+                    <MudItem md="4" sm="2">
+                        @if (HoraSelecionada == "18:30")
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick=@(()=>{EscolheHorario("18:30");}) Disabled="true">18:30</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick=@(()=>{EscolheHorario("18:30");}) Disabled="true">18:30</MudButton>
+                        }
+                    </MudItem>
+                    <MudItem md="4" sm="2">
+                        @if (HoraSelecionada == "21:30")
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Success" FullWidth="true" OnClick=@(()=>{EscolheHorario("21:30");})>21:30</MudButton>
+                        }
+                        else
+                        {
+                            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick=@(()=>{EscolheHorario("21:30");})>21:30</MudButton>
+                        }
+                    </MudItem>
+                </MudGrid>
+            }
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="AvancarEscolhaDataHora" Disabled="string.IsNullOrEmpty(HoraSelecionada)">Avançar</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Default" FullWidth="true" OnClick="@(()=>{ Voltar("/"); })">Voltar</MudButton>
+        }
+        else if(ControlaTela == 2)
+        {
+            <MudText Typo="Typo.h6" Align="Align.Center" Class="mb-4">Informe seus dados</MudText>
+
+            <MudTextField @bind-Text="Nome" Label="Nome Completo" Variant="Variant.Outlined" Class="mb-4" T="string" FullWidth="true" />
+            <MudTextField @bind-Text="Celular" Label="Celular" Variant="Variant.Outlined" Class="mb-4" T="string" FullWidth="true" Mask="@(new PatternMask("(00) 00000-0000"))" />
+            <MudTextField @bind-Text="TextoOpcional" Label="Celular" Variant="Variant.Outlined" Class="mb-4" T="string" FullWidth="true" Placeholder="Observação opcional" Lines="10" />
+
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" OnClick="FinalizarAgendamento" @bind-Disabled="@DisabledBotaoAvancar">Avançar</MudButton>
+            <MudButton Variant="Variant.Text" Color="Color.Default" FullWidth="true" OnClick="@Voltar">Voltar</MudButton>
+        }
+
+    </MudPaper>
+</MudContainer>

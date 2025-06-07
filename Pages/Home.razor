@@ -1,0 +1,21 @@
+﻿@page "/"
+@layout MainLayoutEmpty
+@inherits HomeBase
+
+<MudContainer MaxWidth="MaxWidth.Medium" Class="d-flex justify-center align-center" Style="min-height: 100vh;">
+    <MudPaper Class="d-flex flex-column align-center pa-8" Width="100%" Elevation="2">
+        <MudImage Src="https://assets.api.uizard.io/api/cdn/stream/f018fc08-23bb-4c69-ad84-1f7e8ae8dbab.jpg" Alt="Logo Fabex Dreads" Width="150" Height="150" Class="rounded-circle mb-4" />
+
+        <MudText Typo="Typo.h5" Align="Align.Center" Class="mb-4">Titulo da tela Inicial</MudText>
+
+        <MudButton Variant="Variant.Filled" Color="Color.Primary" FullWidth="true" Class="mb-2" OnClick=Agendar>
+            <MudIcon Icon="@Icons.Material.Filled.Add" Class="mr-2" />
+            Novo Agendamento
+        </MudButton>
+
+        <MudButton Variant="Variant.Outlined" Color="Color.Default" FullWidth="true">
+            <MudIcon Icon="@Icons.Material.Filled.Folder" Class="mr-2" />
+            Meus agendamentos
+        </MudButton>
+    </MudPaper>
+</MudContainer>

@@ -25,7 +25,7 @@
       "url": "icon-512.png"
     },
     {
-      "hash": "sha256-\/zJOda13GHDsMpEMhcGDJAHXZmmNHw+e+rw0EReYGns=",
+      "hash": "sha256-E4NptQqBcHYq3afoaACiaPg0ev0DSmPNwD1MqLdMwHQ=",
       "url": "index.html"
     },
     {
@@ -449,5 +449,5 @@
       "url": "_content\/UI.Components\/UI.Components.bundle.scp.css"
     }
   ],
-  "version": "8+PF8DmL"
+  "version": "d1vPciHg"
 };

@@ -1,0 +1,291 @@
+﻿@page "/solicitar-orcamento/{codid}"
+@layout MainLayoutEmpty
+@inherits SolicitarOrcamentoBase
+@using AgendaE.Common.Extension
+
+<MudContainer>
+    @if (Orcamento == null || Usuario == null)
+    {
+        <MudText Typo="Typo.h6" Class="mt-4 mb-2">Carregando...</MudText>
+    }
+    else
+    {
+        <MudTabs Elevation="0" Centered="true" Outlined="true" Position="@Position.Top" Rounded="true" Border="true" ApplyEffectsToContainer="true" Class="mt-8" PanelClass="pa-6" @bind-ActivePanelIndex="PanelIndex">
+            <MudTabPanel Icon="@Icons.Material.Filled.Info">
+                <EditForm Model="@Orcamento" OnValidSubmit="@AvancarPasso2">
+                    <DataAnnotationsValidator />
+
+                    <!-- Dados do Cliente -->
+                    <MudText Typo="Typo.h6" Class="mt-4 mb-2">Dados Pessoais</MudText>
+                    <MudGrid>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Orcamento.NomeCliente"
+                                          Label="Nome Completo"
+                                          Required="true" />
+                        </MudItem>
+                        <MudItem xs="12" sm="6">
+                            <MudTextField @bind-Value="Orcamento.Telefone"
+                                          Label="Telefone"
+                                          Required="true"
+                                          InputType="InputType.Telephone" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField @bind-Value="Orcamento.Email"
+                                          Label="E-mail"
+                                          InputType="InputType.Email" />
+                        </MudItem>
+                    </MudGrid>
+
+                    <!-- Endereço -->
+                    <MudText Typo="Typo.h6" Class="mt-6 mb-2">Endereço</MudText>
+                    <MudGrid>
+                        <MudItem xs="12" sm="4">
+                            <MudTextField Label="CEP"
+                                          Required="true" Mask="@(new PatternMask("00000-000"))" ValueChanged="@((string newValue) => { Orcamento.CEP = newValue; return BuscarCEP(); })" Value="Orcamento.CEP" @bind-Disabled="@DisabledCampoCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="8">
+                            <MudTextField @bind-Value="Orcamento.Logradouro"
+                                          Label="Logradouro"
+                                          Required="true" @bind-Disabled="@DisabledCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudTextField @bind-Value="Orcamento.Numero" InputType="InputType.Number"
+                                          Label="Número"
+                                          Required="true" @bind-Disabled="@DisabledCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudTextField @bind-Value="Orcamento.Complemento"
+                                          Label="Complemento" />
+                        </MudItem>
+                        <MudItem xs="12" sm="3">
+                            <MudTextField @bind-Value="Orcamento.Bairro"
+                                          Label="Bairro"
+                                          Required="true" @bind-Disabled="@DisabledCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="3">
+                            <MudTextField @bind-Value="Orcamento.Cidade"
+                                          Label="Cidade"
+                                          Required="true" @bind-Disabled="@DisabledCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="1">
+                            <MudTextField @bind-Value="Orcamento.Estado"
+                                          Label="UF"
+                                          Required="true" MaxLength="2" @bind-Disabled="@DisabledCep" />
+                        </MudItem>
+                        <MudItem xs="12" sm="12">
+                            <MudTextField @bind-Value="Orcamento.Observacoes"
+                                          Label="Observações Adicionais"
+                                          Lines="3"
+                                          Class="mt-4" />
+                        </MudItem>
+                        <MudItem md="12" Class="mt-6">
+                            <MudGrid Justify="Justify.FlexEnd">
+                                <MudItem>
+                                    <!-- Botão de Envio -->
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               ButtonType="ButtonType.Submit"
+                                               StartIcon="@Icons.Material.Filled.ArrowRightAlt">
+                                        Informar itens da Higienização
+                                    </MudButton>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
+            </MudTabPanel>
+            <MudTabPanel Icon="@Icons.Material.Filled.Article" @bind-Disabled="@DisabledPanel02">
+                <EditForm Model="@Itens" OnValidSubmit="@AdicionarItem">
+                    <DataAnnotationsValidator />
+
+                    <MudText Typo="Typo.h6" Class="mt-4 mb-2">Itens p/ Higianização</MudText>
+                    <MudGrid>
+                        <MudItem xs="12" sm="3">
+                            <MudSelect @bind-Value="TipoItem"
+                                       Label="Tipo de Item *"
+                                       Required="true">
+                                @foreach (var tipo in TiposItens)
+                                {
+                                    <MudSelectItem Value="@tipo.Key">@tipo.Value</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudNumericField @bind-Value="Itens.Quantidade"
+                                             Label="Quantidade *"
+                                             Required="true"
+                                             Min="1" />
+                        </MudItem>
+                        <MudItem xs="12" sm="3">
+                            <MudSelect @bind-Value="Tamanho"
+                                       Label="Tamanho *">
+                                @foreach (var tamanho in TamanhoItens)
+                                {
+                                    <MudSelectItem Value="@tamanho.Key">@tamanho.Value</MudSelectItem>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudTextField @bind-Value="Itens.Material"
+                                          Label="Material" />
+                        </MudItem>
+                        <MudItem xs="12" sm="2">
+                            <MudTextField @bind-Value="Itens.Cor"
+                                          Label="Cor" />
+                        </MudItem>
+                        <MudItem xs="12">
+                            <MudTextField @bind-Value="Itens.Descricao"
+                                          Label="Descrição Adicional"
+                                          Lines="2" />
+                        </MudItem>
+                        <MudItem md="4" Class="mt-4">
+                            <MudGrid Justify="Justify.FlexStart">
+                                <MudItem>
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Success"
+                                               ButtonType="ButtonType.Submit"
+                                               StartIcon="@Icons.Material.Filled.Add">
+                                        Adicionar
+                                    </MudButton>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                        @if (Orcamento.ItensHigianizacao != null && Orcamento.ItensHigianizacao.Count > 0)
+                        {
+                            <MudItem md="4" xs="12" Class="mt-4">
+                                <MudButton Variant="Variant.Filled"
+                                           Color="Color.Info"
+                                           ButtonType="ButtonType.Button"
+                                           OnClick="@FinalizarSolicitacaoOrcamento"
+                                           StartIcon="@Icons.Material.Filled.Check">
+                                    Finalizar solicitação de orçamento
+                                </MudButton>
+                            </MudItem>
+                        }
+                        <MudItem md="4" Class="mt-4">
+                            <MudGrid Justify="Justify.FlexEnd">
+                                <MudItem>
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               ButtonType="ButtonType.Button"
+                                               OnClick="AvancarPasso3"
+                                               Disabled="@(!(Orcamento.ItensHigianizacao != null && Orcamento.ItensHigianizacao.Count > 0))"
+                                               StartIcon="@Icons.Material.Filled.ArrowRightAlt">
+                                        Anexar imagens
+                                    </MudButton>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                    </MudGrid>
+                </EditForm>
+
+                @if (ProgressUploadImagens)
+                {
+                    <MudItem md="12">
+                        <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                    </MudItem>
+                }
+
+                @if (Orcamento.ItensHigianizacao != null && Orcamento.ItensHigianizacao.Count > 0)
+                {
+                    <MudGrid Class="mt-3">
+                        @foreach (var item in Orcamento.ItensHigianizacao)
+                        {
+                            <MudItem xs="12" md="4" sm="6" lg="3">
+                                <p><b>Item:</b> @item.TipoItem.ToDescription()</p>
+                                <p><b>Qtd:</b> @item.Quantidade</p>
+                                <p><b>Descrição:</b> @item.Descricao</p>
+                                <MudButton Variant="Variant.Filled"
+                                           Color="Color.Error"
+                                           ButtonType="ButtonType.Button"
+                                           OnClick="async ()=>{ await RemoverItem(item);}" StartIcon="@Icons.Material.Filled.Delete" Size="Size.Small"
+                                           class="mt-2 mb-3">
+                                </MudButton>
+                            </MudItem>
+
+                        }
+                    </MudGrid>
+                }
+            </MudTabPanel>
+            <MudTabPanel Icon="@Icons.Material.Filled.Image" @bind-Disabled="@DisabledPanel03">
+
+                <MudText Typo="Typo.h6" Class="mt-6 mb-2">Envie imagens do imóvel</MudText>
+
+                <MudGrid>
+                    <MudItem xs="12" md="6">
+                        <MudFileUpload T="IReadOnlyList<IBrowserFile>"
+                                       OnFilesChanged="@OnInputFileChange" AppendMultipleFiles="true"
+                                       Accept="image/*">
+                            <ActivatorContent>
+                                @if (BtnVisibleUploadImagem)
+                                {
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               StartIcon="@Icons.Material.Filled.Attachment">
+                                        Anexar imagens
+                                    </MudButton>
+                                }
+
+                                @if (BtnVisibleEnviarImagem)
+                                {
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Primary"
+                                               ButtonType="ButtonType.Button"
+                                               OnClick="EnviarImagens"
+                                               StartIcon="@Icons.Material.Filled.CloudUpload"
+                                               Class="mt-6">
+                                        Enviar imagens
+                                    </MudButton>
+                                }
+                            </ActivatorContent>
+                        </MudFileUpload>
+                    </MudItem>
+                    @if (BtnVisibleFinaizarImagens)
+                    {
+                        <MudItem xs="12" md="6">
+                            <MudGrid Justify="Justify.FlexEnd">
+                                <MudItem>
+                                    <MudButton Variant="Variant.Filled"
+                                               Color="Color.Info"
+                                               ButtonType="ButtonType.Button"
+                                               OnClick="@FinalizarSolicitacaoOrcamento"
+                                               StartIcon="@Icons.Material.Filled.Check"
+                                               Class="mt-5">
+                                        Finalizar Solicitação de orçamento
+                                    </MudButton>
+                                </MudItem>
+                            </MudGrid>
+                        </MudItem>
+                    }
+                    @if (ProgressUploadImagens)
+                    {
+                        <MudItem md="12">
+                            <MudProgressLinear Color="Color.Primary" Indeterminate="true" Class="my-7" />
+                        </MudItem>
+                    }
+                    <MudItem md="12">
+                        @if (SelectedFile != null && SelectedFile.Count > 0)
+                        {
+                            <MudGrid Spacing="2">
+
+                                @foreach (var item in SelectedFile)
+                                {
+                                    <MudItem md="4" xs="12" sm="12">
+                                        <MudCard>
+                                            <MudCardMedia Image="@item.Value" Height="100" />
+                                            <MudCardActions>
+                                                <MudIconButton Color="Color.Error" ButtonType="ButtonType.Button" Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete" Size="Size.Small" OnClick="async ()=>{ await RemoverImagem(item.Key); }" @bind-Disabled="@ProgressUploadImagens">
+                                                </MudIconButton>
+                                            </MudCardActions>
+                                        </MudCard>
+                                    </MudItem>
+                                }
+                            </MudGrid>
+                        }
+                    </MudItem>
+                </MudGrid>
+            </MudTabPanel>
+        </MudTabs>
+    }
+</MudContainer>
+

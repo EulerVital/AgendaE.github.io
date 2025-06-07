@@ -1,0 +1,32 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>55a03586-5010-4c5e-85b0-c95f2ee5e2f1</UserSecretsId>
+    <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <DockerComposeProjectPath>..\docker-compose.dcproj</DockerComposeProjectPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
+    <PackageReference Include="FirebaseAdmin" Version="3.2.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="8.0.15" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Localization" Version="2.3.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.6.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="img\tipos\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\AgendaE.Common\AgendaE.Common.csproj" />
+    <ProjectReference Include="..\AgendaE.Core\AgendaE.Core.csproj" />
+    <ProjectReference Include="..\AgendaE.DataAccess\AgendaE.DataAccess.csproj" />
+    <ProjectReference Include="..\Domain.Dto\Domain.Dto.csproj" />
+  </ItemGroup>
+
+</Project>

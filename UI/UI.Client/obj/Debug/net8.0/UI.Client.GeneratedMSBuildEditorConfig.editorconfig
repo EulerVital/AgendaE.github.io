@@ -1,0 +1,46 @@
+is_global = true
+build_property.EnableAotAnalyzer = 
+build_property.EnableSingleFileAnalyzer = 
+build_property.EnableTrimAnalyzer = false
+build_property.IncludeAllContentForSelfExtract = 
+build_property.MudDebugAnalyzer = 
+build_property.MudAllowedAttributePattern = 
+build_property.MudAllowedAttributeList = 
+build_property.TargetFramework = net8.0
+build_property.TargetPlatformMinVersion = 
+build_property.UsingMicrosoftNETSdkWeb = 
+build_property.ProjectTypeGuids = 
+build_property.InvariantGlobalization = false
+build_property.PlatformNeutralAssembly = 
+build_property.EnforceExtendedAnalyzerRules = 
+build_property._SupportedPlatformList = browser
+build_property.RootNamespace = UI.Client
+build_property.RootNamespace = UI.Client
+build_property.ProjectDir = D:\Projetos\AgendaE\UI\UI.Client\
+build_property.EnableComHosting = 
+build_property.EnableGeneratedComInterfaceComImportInterop = false
+build_property.RazorLangVersion = 8.0
+build_property.SupportLocalizedComponentNames = 
+build_property.GenerateRazorMetadataSourceChecksumAttributes = 
+build_property.MSBuildProjectDirectory = D:\Projetos\AgendaE\UI\UI.Client
+build_property._RazorSourceGeneratorDebug = 
+
+[D:/Projetos/AgendaE/UI/UI.Client/Layout/MainLayoutEmpty.razor]
+build_metadata.AdditionalFiles.TargetPath = TGF5b3V0XE1haW5MYXlvdXRFbXB0eS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/AgendaE/UI/UI.Client/Pages/Begin/HomeNotLogin.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcQmVnaW5cSG9tZU5vdExvZ2luLnJhem9y
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/AgendaE/UI/UI.Client/Pages/ToChoose/CalendarSchedule.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9DaG9vc2VcQ2FsZW5kYXJTY2hlZHVsZS5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/AgendaE/UI/UI.Client/_Imports.razor]
+build_metadata.AdditionalFiles.TargetPath = X0ltcG9ydHMucmF6b3I=
+build_metadata.AdditionalFiles.CssScope = 
+
+[D:/Projetos/AgendaE/UI/UI.Client/Pages/ToChooseProduct/ListCards.razor]
+build_metadata.AdditionalFiles.TargetPath = UGFnZXNcVG9DaG9vc2VQcm9kdWN0XExpc3RDYXJkcy5yYXpvcg==
+build_metadata.AdditionalFiles.CssScope = b-3iet676nm9

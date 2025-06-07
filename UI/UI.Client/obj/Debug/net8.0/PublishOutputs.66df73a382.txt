@@ -1,0 +1,1 @@
+D:\Projetos\AgendaE\UI\UI.Client\bin\Debug\net8.0\publish\web.config

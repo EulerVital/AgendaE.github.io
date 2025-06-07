@@ -1,0 +1,50 @@
+name: dockercompose11156945737311258888
+services:
+  agendae:
+    build:
+      context: D:\Projetos\AgendaE\src
+      dockerfile: API/Dockerfile
+    depends_on:
+      sqlserver:
+        condition: service_started
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: http://+:3000
+      CLOUDINARY_API_KEY: "799449923693512"
+      CLOUDINARY_API_SECRET: XiMHAmqephrPmZJtzz_V5kjMRck
+      CLOUDINARY_CLOUD_NAME: Producao
+      ConnectionStrings__DefaultConnection: Server=sqlserver;Database=agendaE;User=sa;Password=#aG@3E;
+      Secrets_Codigo: qKac7mgbmu8b3RHU%AcU!R
+    image: agendae
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 3000
+      published: "3000"
+      protocol: tcp
+  sqlserver:
+    container_name: sqlserver
+    environment:
+      ACCEPT_EULA: "Y"
+      MSSQL_PID: Express
+      SA_PASSWORD: '#aG@3E'
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    networks:
+      default: null
+    ports:
+    - mode: ingress
+      target: 1433
+      published: "1433"
+      protocol: tcp
+    volumes:
+    - type: volume
+      source: sql_data
+      target: /var/opt/mssql
+      volume: {}
+networks:
+  default:
+    name: dockercompose11156945737311258888_default
+volumes:
+  sql_data:
+    name: dockercompose11156945737311258888_sql_data

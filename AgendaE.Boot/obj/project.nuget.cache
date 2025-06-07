@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "dgSpecHash": "zhtJPoPnv10=",
+  "success": true,
+  "projectFilePath": "D:\\Projetos2\\AgendaE-public\\AgendaE.Boot\\AgendaE.Boot.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Euler Trampo\\.nuget\\packages\\selenium.webdriver\\4.31.0\\selenium.webdriver.4.31.0.nupkg.sha512",
+    "C:\\Users\\Euler Trampo\\.nuget\\packages\\selenium.webdriver.chromedriver\\135.0.7049.9500\\selenium.webdriver.chromedriver.135.0.7049.9500.nupkg.sha512"
+  ],
+  "logs": []
+}

@@ -1,0 +1,1 @@
+D:\Projetos\AgendaE\UI.App\obj\Release\net8.0\browser-wasm\PubTmp\Out\web.config

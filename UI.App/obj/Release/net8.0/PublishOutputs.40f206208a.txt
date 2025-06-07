@@ -1,6 +1,0 @@
-D:\Projetos\AgendaE\src\UI.App\release\release\web.config
-D:\Projetos\AgendaE\src\UI.App\release\release\wwwroot\appsettings.Development.json
-D:\Projetos\AgendaE\src\UI.App\release\release\wwwroot\appsettings.json
-D:\Projetos\AgendaE\src\UI.App\release\release\wwwroot\sample-data\weather.json
-D:\Projetos\AgendaE\src\UI.App\release\release\wwwroot\_framework\blazor.boot.json
-D:\Projetos\AgendaE\src\UI.App\release\web.config
